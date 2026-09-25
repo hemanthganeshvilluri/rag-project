@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ASTRA RAG</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background decoration -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <div class="app-container">
+
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">✦</div>
+
+                <div>
+                    <h1>ASTRA</h1>
+                    <span>Document Intelligence</span>
+                </div>
+            </div>
+
+            <button class="new-chat-btn" onclick="newChat()">
+                <span>＋</span>
+                New Chat
+            </button>
+
+            <!-- Upload area -->
+
+            <div class="upload-card">
+
+                <div class="upload-icon">
+                    ↑
+                </div>
+
+                <h3>Upload documents</h3>
+
+                <p>
+                    PDF, DOCX, TXT and other supported files
+                </p>
+
+                <label class="upload-button">
+
+                    Choose File
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        hidden
+                    >
+
+                </label>
+
+                <div
+                    class="drop-zone"
+                    id="dropZone"
+                >
+                    or drag & drop here
+                </div>
+
+            </div>
+
+            <!-- Uploaded documents -->
+
+            <div class="documents-section">
+
+                <div class="section-header">
+
+                    <span>Documents</span>
+
+                    <span id="documentCount">
+                        0
+                    </span>
+
+                </div>
+
+                <div
+                    id="documentList"
+                    class="document-list"
+                >
+
+                    <div class="empty-documents">
+                        No documents uploaded yet
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sidebar-footer">
+
+                <div class="connection-status">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        API Connected
+                    </span>
+
+                </div>
+
+                <span class="version">
+                    RAG v1.0
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- ================= MAIN CHAT ================= -->
+
+        <main class="main-content">
+
+            <!-- Header -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>Ask your documents</h2>
+
+                    <p>
+                        Search, understand and interact with your knowledge base.
+                    </p>
+
+                </div>
+
+                <div class="topbar-badge">
+                    AI RAG
+                </div>
+
+            </header>
+
+
+            <!-- Chat area -->
+
+            <section
+                class="chat-container"
+                id="chatContainer"
+            >
+
+                <!-- Welcome screen -->
+
+                <div
+                    class="welcome-screen"
+                    id="welcomeScreen"
+                >
+
+                    <div class="welcome-icon">
+                        ✦
+                    </div>
+
+                    <h2>
+                        What would you like to know?
+                    </h2>
+
+                    <p>
+                        Ask questions about your uploaded documents.
+                        ASTRA will retrieve the relevant information and
+                        generate an answer.
+                    </p>
+
+                    <div class="suggestion-grid">
+
+                        <button onclick="useSuggestion('What is this document about?')">
+                            <span>⌕</span>
+                            What is this document about?
+                        </button>
+
+                        <button onclick="useSuggestion('Summarize the main points.')">
+                            <span>✧</span>
+                            Summarize the main points
+                        </button>
+
+                        <button onclick="useSuggestion('What are the important findings?')">
+                            <span>◈</span>
+                            What are the important findings?
+                        </button>
+
+                        <button onclick="useSuggestion('Show me the important information from the tables.')">
+                            <span>▦</span>
+                            Analyze the tables
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Chat input -->
+
+            <div class="input-wrapper">
+
+                <div class="input-box">
+
+                    <textarea
+                        id="queryInput"
+                        placeholder="Ask anything about your documents..."
+                        rows="1"
+                    ></textarea>
+
+                    <button
+                        id="sendButton"
+                        class="send-button"
+                        onclick="sendMessage()"
+                    >
+                        ↑
+                    </button>
+
+                </div>
+
+                <div class="input-hint">
+                    ASTRA answers using your indexed documents
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <!-- Upload notification -->
+
+    <div
+        id="notification"
+        class="notification"
+    ></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
