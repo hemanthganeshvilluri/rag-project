@@ -10,7 +10,7 @@ class Chatrequest(BaseModel):
 @router.post('/chat')
 async def chat(req: Request, chat_req: Chatrequest):
     models = req.app.state.models
-    vector_db = req.app.store.vector_db
+    vector_db = req.app.state.vector_db
 
     query, response, chunks = query_pipeline(query, vector_db, models)
     return {
