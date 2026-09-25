@@ -5,12 +5,14 @@ from sentence_transformers import CrossEncoder
 from langchain_ollama import OllamaLLM
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import torch
+import os
 
 def load_models():
     converter = DocumentConverter()
 
-    processor = AutoProcessor.from_pretrained('google/gemma-3-4b-it')
-    model = AutoModelForMultimodalLM.from_pretrained('google/gemma-3-4b-it', dtype = torch.bfloat16, device_map = 'auto')
+    hf_token = os.getenv("HF_TOKEN")
+    processor = AutoProcessor.from_pretrained('google/gemma-3-4b-it', token = hf_token)
+    model = AutoModelForMultimodalLM.from_pretrained('google/gemma-3-4b-it', dtype = torch.bfloat16, device_map = 'auto', token = hf_token)
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size = 950, chunk_overlap = 125)
 
