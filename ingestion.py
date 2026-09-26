@@ -18,8 +18,7 @@ def ingestion(document, converter):
                 'document': result.document
             })
         except Exception as e:
-            except Exception as e:
-                import traceback
-                print(f'failed to process {file}: {e}')
-                traceback.print_exc()
+            import traceback
+            print(f'failed to process {file}: {e}')
+            traceback.print_exc()
     return results
