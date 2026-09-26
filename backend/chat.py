@@ -12,7 +12,7 @@ async def chat(req: Request, chat_req: Chatrequest):
     models = req.app.state.models
     vector_db = req.app.state.vector_db
 
-    query, response, chunks = query_pipeline(query, vector_db, models)
+    query, response, chunks = query_pipeline(chat_req.query, vector_db, models)
     return {
         "query": query,
         "answer": response,
