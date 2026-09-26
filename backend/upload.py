@@ -16,6 +16,6 @@ async def upload_file(req: Request, file: UploadFile = File(...)):
     vector_db = req.app.state.vector_db
     ingestion_pipeline(file_path, models, vector_db)
     return {
-        'message': 'File Uloaded Successfully...!',
+        'message': 'File Uploaded Successfully...!',
         'file': file.filename
     }
