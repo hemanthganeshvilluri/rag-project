@@ -6,6 +6,7 @@ def formatting_documents(documents, processor, model):
         doc = file['document']
         curr_section = None
         for element in doc:
+            print("ELEMENT TYPE:", type(element).__name__)
             if type(element).__name__ == 'SectionHeaderItem':
                 text = element.text
                 curr_section = text
