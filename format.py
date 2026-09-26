@@ -5,7 +5,7 @@ def formatting_documents(documents, processor, model):
         source = file['source']
         doc = file['document']
         curr_section = None
-        for element in doc:
+        for _, element in doc:
             print("ELEMENT TYPE:", type(element).__name__)
             if type(element).__name__ == 'SectionHeaderItem':
                 text = element.text
