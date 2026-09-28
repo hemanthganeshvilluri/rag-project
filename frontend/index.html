@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASTRA RAG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="brand-mark">A</div>
+    <div><div class="brand-name">ASTRA</div><div class="brand-subtitle">DOCUMENT INTELLIGENCE</div></div>
+  </div>
+
+  <button class="new-chat-btn" id="newChatButton"><span>＋</span> New conversation</button>
+
+  <section class="upload-panel">
+    <div class="section-label">Knowledge base</div>
+    <div class="drop-zone" id="dropZone">
+      <div class="upload-icon">↑</div>
+      <div class="drop-title">Add a document</div>
+      <div class="drop-text">PDF, DOCX and other supported files</div>
+      <button class="browse-btn" id="browseButton">Browse files</button>
+      <input type="file" id="fileInput" hidden>
+    </div>
+  </section>
+
+  <section class="documents-panel">
+    <div class="documents-heading">
+      <span class="section-label">Documents</span>
+      <span class="document-count" id="documentCount">0</span>
+    </div>
+    <div id="documentList" class="document-list">
+      <div class="empty-documents"><span>◇</span><p>No documents yet</p><small>Upload a file to start asking questions.</small></div>
+    </div>
+  </section>
+
+  <div class="sidebar-footer">
+    <div class="connection"><span class="status-dot"></span> API connected</div>
+    <div class="api-label">FastAPI · Docker</div>
+  </div>
+</aside>
+
+<main class="main">
+  <header class="topbar">
+    <div class="mobile-brand"><div class="brand-mark">A</div><span>ASTRA</span></div>
+    <div class="engine-pill"><span class="mini-dot"></span> RAG Engine</div>
+  </header>
+
+  <div class="chat-area" id="chatContainer">
+    <section class="welcome" id="welcomeScreen">
+      <div class="welcome-orb"><div class="orb-core">A</div></div>
+      <div class="eyebrow">DOCUMENT Q&A</div>
+      <h1>Ask your knowledge base.</h1>
+      <p class="welcome-text">Upload your documents and ask questions. ASTRA retrieves relevant passages, reranks them, and generates an answer from your sources.</p>
+
+      <div class="suggestions">
+        <button class="suggestion" onclick="useSuggestion('What is the main idea of this document?')">
+          <span class="suggestion-icon">✦</span><span><strong>Understand the document</strong><small>What is the main idea?</small></span><span class="arrow">→</span>
+        </button>
+        <button class="suggestion" onclick="useSuggestion('Summarize the key points from this document.')">
+          <span class="suggestion-icon">≡</span><span><strong>Get a summary</strong><small>Show me the key points</small></span><span class="arrow">→</span>
+        </button>
+        <button class="suggestion" onclick="useSuggestion('What are the important findings in this document?')">
+          <span class="suggestion-icon">⌁</span><span><strong>Find important details</strong><small>What are the main findings?</small></span><span class="arrow">→</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <div class="composer-wrap">
+    <div class="composer">
+      <textarea id="queryInput" rows="1" placeholder="Ask anything about your documents..."></textarea>
+      <button class="send-btn" id="sendButton" aria-label="Send message"><span>↑</span></button>
+    </div>
+    <div class="composer-note"><span>ASTRA answers using retrieved document context.</span><span>Enter to send · Shift + Enter for new line</span></div>
+  </div>
+</main>
+</div>
+
+<div class="notification" id="notification"></div>
+<script src="script.js"></script>
+</body>
+</html>
