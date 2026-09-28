@@ -35,4 +35,4 @@ app.include_router(chat_router)
 
 @app.get('/')
 def home():
-    return FileResponse('frontend.index.html')
+    return FileResponse('frontend/index.html')
