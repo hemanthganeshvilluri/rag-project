@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FIleResponse
 from models import load_models
 from qdrant import vector_database
 from backend.upload import router as upload_router
@@ -23,9 +25,14 @@ app.add_middleware(
     allow_methods = ["*"],
     allow_headers = ["*"],
 )
+app.mount(
+    "/static",
+    StaticFIles(directory = 'frontend'),
+    name = 'static'
+)
 app.include_router(upload_router)
 app.include_router(chat_router)
 
 @app.get('/')
 def home():
-    return {'message': 'Application Running Successfully...!'}
+    return FileResponse('frontend.index.html')
