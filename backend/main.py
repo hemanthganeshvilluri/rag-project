@@ -27,7 +27,7 @@ app.add_middleware(
 )
 app.mount(
     "/static",
-    StaticFIles(directory = 'frontend'),
+    StaticFiles(directory = 'frontend'),
     name = 'static'
 )
 app.include_router(upload_router)
