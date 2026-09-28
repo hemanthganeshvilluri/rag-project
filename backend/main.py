@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FIleResponse
+from fastapi.responses import FileResponse
 from models import load_models
 from qdrant import vector_database
 from backend.upload import router as upload_router
