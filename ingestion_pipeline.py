@@ -2,15 +2,17 @@ from ingestion import ingestion
 from format import formatting_documents
 from chunking import chunking
 from vectordb import embedding
+from structure_aware import identifying_structure
 
 def ingestion_pipeline(files, models, vector_db):
     documents = ingestion(
         files,
         models['converter']
     )
+    elements = identifying_structure(documents)
     print("DOCUMENTS:", len(documents))
     formatted_docs = formatting_documents(
-        documents,
+        elements,
         models['processor'],
         models['model']
     )
