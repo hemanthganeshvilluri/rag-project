@@ -3,7 +3,7 @@ from docling_core.types.doc import SectionHeaderItem, TextItem, ListItem, TableI
 
 def identifying_structure(doc):
     elements = []
-    for element, _ in doc.iterate_items():
+    for source, element in doc.iterate_items():
         text = getattr(element, "text", None)
         if isinstance(element, SectionHeaderItem):
             element_type = "header"
