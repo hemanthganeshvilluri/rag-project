@@ -1,5 +1,5 @@
 from langchain_core.documents import Document
-def group_by_headers(elements):
+def grouping_by_headers(elements):
     groups = []
     current_group = []
     for element in elements:
