@@ -7,33 +7,23 @@ def identifying_structure(doc):
         text = getattr(element, "text", None)
         if isinstance(element, SectionHeaderItem):
             element_type = "header"
-        
         elif isinstance(element, TextItem):
-        
             if similar_to_header(element):
                 element_type = "header"
             else:
                 element_type = "text"
-        
         elif isinstance(element, ListItem):
             element_type = "list_item"
-        
         elif isinstance(element, TableItem):
             element_type = "table"
-        
         elif isinstance(element, PictureItem):
             element_type = "image"
-        
         else:
             element_type = "other"
-        
-                # Remove numbering only for headers
         if element_type == "header" and text:
-            text = remove_numbered_headers(text)
-        
+            text = remove_numbered_headers(text)   
         elements.append({
             "type": element_type,
             "content": text
             })
-        
     return elements
