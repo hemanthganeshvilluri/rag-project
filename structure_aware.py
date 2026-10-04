@@ -24,9 +24,16 @@ def identifying_structure(documents):
             else:
                element_type = "other"
             if element_type == "header" and text:
-               text = remove_numbered_headers(text)   
+               text = remove_numbered_headers(text)
+            page_no = (
+                element.prov[0].page_no
+                if hasattr(element, "prov") and element.prov
+                else None
+            )
             elements.append({
                 "type": element_type,
-                "content": text
+                "content": text,
+                "source": source,
+                "page_no": page_no
             })
     return elements
