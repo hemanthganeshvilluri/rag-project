@@ -6,7 +6,7 @@ def identifying_structure(documents):
     for file in documents:
         source = file["source"]
         doc = file["document"]
-        for source, element in doc.iterate_items():
+        for element, _ in doc.iterate_items():
            text = getattr(element, "text", None)
             if isinstance(element, SectionHeaderItem):
                element_type = "header"
