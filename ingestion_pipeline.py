@@ -3,7 +3,7 @@ from format import formatting_documents
 from chunking import chunking
 from vectordb import embedding
 from structure_aware import identifying_structure
-from grouping import group_by_headers
+from grouping import grouping_by_headers
 
 def ingestion_pipeline(files, models, vector_db):
     documents = ingestion(
