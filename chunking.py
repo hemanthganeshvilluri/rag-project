@@ -4,7 +4,7 @@ def chunking(groups, text_splitter):
     for group in groups:
         text = "\n\n".join(
             element["content"]
-            for element in group
+            for element in group["content"]
             if element["content"]
         )
         if not text:
@@ -13,10 +13,11 @@ def chunking(groups, text_splitter):
         for chunk in split_texts:
             final_chunks.append(
                 Document(
-                    page_content=chunk,
+                    page_content = chunk,
                     metadata={
-                        "source": group[0]["source"],
-                        "page_no": group[0]["page_no"]
+                        "source": group["source"],
+                        "page_no": group["page_no"],
+                        "section": group["section"]
                     }
                 )
             )
