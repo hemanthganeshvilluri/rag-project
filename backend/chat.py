@@ -19,7 +19,6 @@ async def chat(req: Request, chat_req: Chatrequest):
         "sources": [
             {
                 "source": chunk.metadata["source"],
-                "type": chunk.metadata["type"],
                 "section": chunk.metadata["section"],
                 "page_no": chunk.metadata["page_no"]
             }
