@@ -4,13 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from models import load_models
-from qdrant import vector_database
+from qdrant import vector_database, delete_collection
 from backend.upload import router as upload_router
 from backend.chat import router as chat_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     models = load_models()
+    delete_collection()
     vector_db = vector_database(models['embed_model'])
 
     app.state.models = models
