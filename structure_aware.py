@@ -1,7 +1,7 @@
 from element_type_formatting import similar_to_header, remove_numbered_headers
 from docling_core.types.doc import SectionHeaderItem, TextItem, ListItem, TableItem, PictureItem
 
-def identifying_structure(doc):
+def identifying_structure(documents):
     elements = []
     for file in documents:
         source = file["source"]
