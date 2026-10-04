@@ -36,6 +36,7 @@ def identifying_structure(documents):
                 "type": element_type,
                 "content": text,
                 "element": element,
+                "document": doc,
                 "source": source,
                 "page_no": page_no
             })
