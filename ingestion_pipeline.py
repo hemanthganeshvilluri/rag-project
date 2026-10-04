@@ -21,7 +21,7 @@ def ingestion_pipeline(files, models, vector_db):
     groups = grouping_by_headers(
         formatted_docs
     )
-    chunks = chunking(groups, models['text_splitter']
+    chunks = chunking(groups, models['text_splitter'])
     print("CHUNKS:", len(chunks))
     for chunk in chunks[:3]:
         print("CHUNK:", chunk.page_content[:200])
