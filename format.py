@@ -1,61 +1,28 @@
-from docling_core.types.doc import DoclingDocument, TextItem, SectionHeaderItem, ListItem, TableItem, PictureItem
 from image_descripter import generate_text
-def formatting_documents(documents, processor, model):
+def formatting_documents(elements, processor, model):
     results = []
-    for file in documents:
-        source = file['source']
-        doc: DoclingDocument = file['document']
-        curr_section = None
-        for element, _ in doc.iterate_items():
-            page_no = element.prov[0].page_no if (hasattr(element, 'prov') and element.prov) else None
-            if isinstance(element, SectionHeaderItem):
-                text = element.text
-                curr_section = text
-                results.append({
-                    'content': text,
-                    'type': 'heading',
-                    'section': curr_section,
-                    'source': source,
-                    'page_no': page_no
-                })
-            elif isinstance(element, TextItem):
-                text = element.text
-                results.append({
-                    'content': text,
-                    'type': 'text',
-                    'section': curr_section,
-                    'source': source,
-                    'page_no': page_no
-                })
-            elif isinstance(element, ListItem):
-                text = element.text
-                results.append({
-                    'content': text,
-                    'type': 'list_item',
-                    'section': curr_section,
-                    'source': source,
-                    'page_no': page_no
-                })
-            elif isinstance(element, TableItem):
-                table_df = element.export_to_dataframe(doc)
-                results.append({
-                    'content': table_df,
-                    'type': 'table',
-                    'section': curr_section,
-                    'source': source,
-                    'page_no': page_no
-                })
-            elif isinstance(element, PictureItem):
-                image = element.get_image(doc)
-                if image:
-                    image_to_text = generate_text(image, processor, model)
-                else:
-                    image_to_text = ""
-                results.append({
-                    'content': image_to_text,
-                    'type': 'image',
-                    'section': curr_section,
-                    'source': source,
-                    'page_no': page_no
-                }) 
+    for element in elements:
+        if element["type"] == "header":
+            content = f"# {element['content']}"
+        elif element["type"] == "text":
+            content = element["content"]
+        elif element["type"] == "list_item":
+            content = f"- {element['content']}"
+        elif element["type"] == 'image':
+            image = element['element'].get_image(element['document'])
+            if image:
+                content = generate_text(image, processor, model)
+            else:
+                content = ""
+        elif element['type'] == 'table':
+            table_df = element["element"].export_to_dataframe(element["document"])
+            content = table_df.to_markdown(index=False)
+        else:
+            continue
+        results.append({
+            "content": content,
+            "type": element["type"],
+            "source": element["source"],
+            "page_no": element["page_no"]
+        })
     return results
