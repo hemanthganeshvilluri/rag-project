@@ -31,9 +31,11 @@ def identifying_structure(documents):
                 else None
             )
             elements.append({
-                "type": element_type,
-                "content": text,
-                "source": source,
-                "page_no": page_no
-            })
+             "type": element_type,
+             "content": text,
+             "element": element,
+             "document": doc,
+             "source": source,
+             "page_no": page_no
+          })
     return elements
