@@ -17,8 +17,7 @@ def chunking(groups, text_splitter):
                     metadata={
                         "source": group["source"],
                         "page_no": group["page_no"],
-                        "section": group["section"],
-                        "type": group["content"][0]["type"]
+                        "section": group["section"]
                     }
                 )
             )
