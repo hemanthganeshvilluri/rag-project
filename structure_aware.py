@@ -9,33 +9,34 @@ def identifying_structure(documents):
         for element, _ in doc.iterate_items():
             text = getattr(element, "text", None)
             if isinstance(element, SectionHeaderItem):
-               element_type = "header"
+                element_type = "header"
             elif isinstance(element, TextItem):
-               if similar_to_header(element):
-                  element_type = "header"
-               else:
-                  element_type = "text"
+                if similar_to_header(element):
+                    element_type = "header"
+                else:
+                    element_type = "text"
             elif isinstance(element, ListItem):
-               element_type = "list_item"
+                element_type = "list_item"
             elif isinstance(element, TableItem):
-               element_type = "table"
+                element_type = "table"
             elif isinstance(element, PictureItem):
-               element_type = "image"
+                element_type = "image"
             else:
-               element_type = "other"
+                element_type = "other"
+
             if element_type == "header" and text:
-               text = remove_numbered_headers(text)
+                text = remove_numbered_headers(text)
+
             page_no = (
                 element.prov[0].page_no
                 if hasattr(element, "prov") and element.prov
                 else None
             )
             elements.append({
-             "type": element_type,
-             "content": text,
-             "element": element,
-             "document": doc,
-             "source": source,
-             "page_no": page_no
-          })
+                "type": element_type,
+                "content": text,
+                "element": element,
+                "source": source,
+                "page_no": page_no
+            })
     return elements
