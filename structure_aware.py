@@ -29,4 +29,4 @@ def identifying_structure(documents):
                 "type": element_type,
                 "content": text
             })
-return elements
+    return elements
