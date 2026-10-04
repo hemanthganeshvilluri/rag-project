@@ -3,6 +3,7 @@ from format import formatting_documents
 from chunking import chunking
 from vectordb import embedding
 from structure_aware import identifying_structure
+from grouping import group_by_headers
 
 def ingestion_pipeline(files, models, vector_db):
     documents = ingestion(
@@ -17,9 +18,8 @@ def ingestion_pipeline(files, models, vector_db):
         models['model']
     )
     print("FORMATTED ELEMENTS:", len(formatted_docs))
-    chunks = chunking(
-        formatted_docs,
-        models['text_splitter']
+    chunks = grouping_by_headers(
+        formatted_docs
     )
     print("CHUNKS:", len(chunks))
     for chunk in chunks[:3]:
